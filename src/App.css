@@ -1,0 +1,32 @@
+.fc .fc-header-toolbar h2 {
+  font-size: 2.3rem;
+}
+
+#calendar table tr td {
+  cursor: pointer;
+}
+
+.card .card-title {
+  font-weight: 400;
+}
+
+.calendar-panel-container {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0d47a1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar:hover {
+  width: 10px;
+}
