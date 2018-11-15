@@ -12,7 +12,7 @@ class CalendarPanel extends Component {
             {this.props.event.banner[0] ? (
               <div className="card-image">
                 <img
-                  src={`http://localhost:5000/api/upload/image/${
+                  src={`/api/upload/image/${
                     this.props.event.banner[0].filename
                   }`}
                   alt="Event Img"
