@@ -119,9 +119,8 @@ class Event extends Component {
               </div>
             </div>
             <div className="col s12 m8">
-              <div className="card">
+              <div className="card event-details">
                 <div className="card-content">
-                  <span className="card-title">Details</span>
                   <div dangerouslySetInnerHTML={createMarkUp()} />
                 </div>
               </div>

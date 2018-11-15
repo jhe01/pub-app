@@ -37,3 +37,15 @@
 ::-webkit-scrollbar:hover {
   width: 10px;
 }
+
+.event-details h4 {
+  font-size: 1.8rem;
+}
+
+.event-details .card-content ul {
+  padding-left: 3rem;
+}
+
+.event-details .card-content ul li {
+  list-style-type: disc;
+}

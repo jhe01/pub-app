@@ -44,9 +44,7 @@ class CalendarPanel extends Component {
               </p>
             </div>
             <div className="card-action">
-              <Link to={`/event/${event._id}`}>
-                <u>Read more ...</u>
-              </Link>
+              <Link to={`/event/${event._id}`}>Read more ...</Link>
             </div>
           </div>
         </div>
