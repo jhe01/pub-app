@@ -2,7 +2,7 @@ import { GET_EVENTS, GET_EVENT } from "./type";
 import axios from "axios";
 
 export const getEvents = () => async dispatch => {
-  const res = await axios.get("http://localhost:5000/api/events/get");
+  const res = await axios.get("/api/events/get");
 
   dispatch({
     type: GET_EVENTS,
@@ -11,7 +11,7 @@ export const getEvents = () => async dispatch => {
 };
 
 export const getEvent = id => async dispatch => {
-  const res = await axios.get(`http://localhost:5000/api/events/get/${id}`);
+  const res = await axios.get(`/api/events/get/${id}`);
 
   dispatch({
     type: GET_EVENT,
