@@ -118,14 +118,14 @@ class CalendarList extends Component {
                 <a
                   href="#!"
                   className={`collection-item blue-text text-darken-4 ${
-                    this.state.activeMonth === "April" ? "active" : ""
+                    this.state.activeMonth === "May" ? "active" : ""
                   }`}
                   onClick={() => {
                     this.onMonthChange(
-                      moment("April", "MMMM").format("MM"),
+                      moment("May", "MMMM").format("MM"),
                       moment().format("YYYY")
                     );
-                    this.setState({ activeMonth: "April" });
+                    this.setState({ activeMonth: "May" });
                   }}
                 >
                   May
