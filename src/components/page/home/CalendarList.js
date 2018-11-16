@@ -4,10 +4,11 @@ import PropTypes from "prop-types";
 
 import moment from "moment";
 
-import { getEvents } from "../../../actions/events";
+import { getEvents, getEventsByMonth } from "../../../actions/events";
 
 import Header from "../../layout/Header";
 import CalendarPanel from "./CalendarPanel";
+import ViewActionButton from "../../util/ViewActionButton";
 
 class CalendarList extends Component {
   state = {
@@ -17,87 +18,41 @@ class CalendarList extends Component {
   };
 
   componentDidMount() {
-    const month = moment().format("MMMM");
-    const year = moment().format("YYYY");
-    this.setState({ activeMonth: month, activeYear: year });
-    this.props.getEvents();
+    const dateNow = moment();
+    const month = dateNow.format("MM");
+    const year = dateNow.format("YYYY");
+    this.setState({ activeMonth: dateNow.format("MMMM"), activeYear: year });
+
+    this.onMonthChange(month, year);
   }
 
-  componentWillReceiveProps(nextProps, nextState) {
-    const { events } = nextProps;
-    const daysInMonth = moment(
-      this.state.activeYear +
-        "-" +
-        moment(this.state.activeMonth, "MMMM").format("MM"),
-      "YYYY-MM"
-    ).daysInMonth();
-    console.log(daysInMonth);
-    const activeEvents = this.filterEvents(events);
-    console.log(activeEvents);
-    this.setState({ activeEvents: activeEvents });
-  }
-
-  filterMonthlyEvents = () => {
-    const { events } = this.props;
-    const activeEvents = this.filterEvents(events);
-    this.setState({ activeEvents: activeEvents });
-  };
-
-  filterEvents = events => {
-    const activeEvents = events.filter(event => {
-      return (
-        (moment(event.from) >=
-          moment(
-            moment(this.state.activeMonth, "MMMM").format("MM") +
-              "-01-" +
-              this.state.activeYear,
-            "MM-DD-YYYY"
-          ) &&
-          moment(event.from) <=
-            moment(
-              moment(this.state.activeMonth, "MMMM").format("MM") +
-                "-" +
-                30 +
-                "-" +
-                this.state.activeYear,
-              "MM-DD-YYYY"
-            )) ||
-        (moment(event.dateOfEvent) >=
-          moment(
-            moment(this.state.activeMonth, "MMMM").format("MM") +
-              "-01-" +
-              this.state.activeYear,
-            "MM-DD-YYYY"
-          ) &&
-          moment(event.dateOfEvent) <=
-            moment(
-              moment(this.state.activeMonth, "MMMM").format("MM") +
-                "-" +
-                30 +
-                "-" +
-                this.state.activeYear,
-              "MM-DD-YYYY"
-            ))
-      );
+  onMonthChange = (month, year) => {
+    const daysInMonth = moment(year + "-" + month, "YYYY-MM").daysInMonth();
+    this.props.getEventsByMonth({
+      fromDay: month + "-01-" + year,
+      toDay: month + "-" + daysInMonth + "-" + year
     });
-    return activeEvents;
   };
 
   render() {
-    const { activeEvents } = this.state;
+    const { events } = this.props;
     return (
       <React.Fragment>
         <Header />
         <div className="container" style={{ marginTop: "10px" }}>
           <div className="row">
             <div className="col s12 m3">
-              <select className="browser-default" defaultValue="">
-                <option value="" disabled selected>
-                  Choose your option
+              <ViewActionButton active="list" />
+              <select
+                className="browser-default"
+                defaultValue={moment().format("YYYY")}
+              >
+                <option value="" disabled>
+                  Choose Year
                 </option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
               </select>
               <div className="collection">
                 <a
@@ -106,6 +61,10 @@ class CalendarList extends Component {
                     this.state.activeMonth === "January" ? "active" : ""
                   }`}
                   onClick={() => {
+                    this.onMonthChange(
+                      moment("January", "MMMM").format("MM"),
+                      moment().format("YYYY")
+                    );
                     this.setState({ activeMonth: "January" });
                   }}
                 >
@@ -117,6 +76,10 @@ class CalendarList extends Component {
                     this.state.activeMonth === "February" ? "active" : ""
                   }`}
                   onClick={() => {
+                    this.onMonthChange(
+                      moment("February", "MMMM").format("MM"),
+                      moment().format("YYYY")
+                    );
                     this.setState({ activeMonth: "February" });
                   }}
                 >
@@ -128,6 +91,10 @@ class CalendarList extends Component {
                     this.state.activeMonth === "March" ? "active" : ""
                   }`}
                   onClick={() => {
+                    this.onMonthChange(
+                      moment("March", "MMMM").format("MM"),
+                      moment().format("YYYY")
+                    );
                     this.setState({ activeMonth: "March" });
                   }}
                 >
@@ -139,6 +106,10 @@ class CalendarList extends Component {
                     this.state.activeMonth === "April" ? "active" : ""
                   }`}
                   onClick={() => {
+                    this.onMonthChange(
+                      moment("April", "MMMM").format("MM"),
+                      moment().format("YYYY")
+                    );
                     this.setState({ activeMonth: "April" });
                   }}
                 >
@@ -147,10 +118,14 @@ class CalendarList extends Component {
                 <a
                   href="#!"
                   className={`collection-item blue-text text-darken-4 ${
-                    this.state.activeMonth === "May" ? "active" : ""
+                    this.state.activeMonth === "April" ? "active" : ""
                   }`}
                   onClick={() => {
-                    this.setState({ activeMonth: "May" });
+                    this.onMonthChange(
+                      moment("April", "MMMM").format("MM"),
+                      moment().format("YYYY")
+                    );
+                    this.setState({ activeMonth: "April" });
                   }}
                 >
                   May
@@ -161,6 +136,10 @@ class CalendarList extends Component {
                     this.state.activeMonth === "June" ? "active" : ""
                   }`}
                   onClick={() => {
+                    this.onMonthChange(
+                      moment("June", "MMMM").format("MM"),
+                      moment().format("YYYY")
+                    );
                     this.setState({ activeMonth: "June" });
                   }}
                 >
@@ -172,6 +151,10 @@ class CalendarList extends Component {
                     this.state.activeMonth === "July" ? "active" : ""
                   }`}
                   onClick={() => {
+                    this.onMonthChange(
+                      moment("July", "MMMM").format("MM"),
+                      moment().format("YYYY")
+                    );
                     this.setState({ activeMonth: "July" });
                   }}
                 >
@@ -183,6 +166,10 @@ class CalendarList extends Component {
                     this.state.activeMonth === "August" ? "active" : ""
                   }`}
                   onClick={() => {
+                    this.onMonthChange(
+                      moment("August", "MMMM").format("MM"),
+                      moment().format("YYYY")
+                    );
                     this.setState({ activeMonth: "August" });
                   }}
                 >
@@ -194,6 +181,10 @@ class CalendarList extends Component {
                     this.state.activeMonth === "September" ? "active" : ""
                   }`}
                   onClick={() => {
+                    this.onMonthChange(
+                      moment("September", "MMMM").format("MM"),
+                      moment().format("YYYY")
+                    );
                     this.setState({ activeMonth: "September" });
                   }}
                 >
@@ -205,7 +196,10 @@ class CalendarList extends Component {
                     this.state.activeMonth === "October" ? "active" : ""
                   }`}
                   onClick={() => {
-                    this.filterMonthlyEvents();
+                    this.onMonthChange(
+                      moment("October", "MMMM").format("MM"),
+                      moment().format("YYYY")
+                    );
                     this.setState({ activeMonth: "October" });
                   }}
                 >
@@ -217,7 +211,10 @@ class CalendarList extends Component {
                     this.state.activeMonth === "November" ? "active" : ""
                   }`}
                   onClick={() => {
-                    this.filterMonthlyEvents();
+                    this.onMonthChange(
+                      moment("November", "MMMM").format("MM"),
+                      moment().format("YYYY")
+                    );
                     this.setState({ activeMonth: "November" });
                   }}
                 >
@@ -229,6 +226,10 @@ class CalendarList extends Component {
                     this.state.activeMonth === "December" ? "active" : ""
                   }`}
                   onClick={() => {
+                    this.onMonthChange(
+                      moment("December", "MMMM").format("MM"),
+                      moment().format("YYYY")
+                    );
                     this.setState({ activeMonth: "December" });
                   }}
                 >
@@ -238,8 +239,8 @@ class CalendarList extends Component {
             </div>
             <div className="col s12 m9">
               <h4 style={{ margin: ".3rem 0 .912rem 0" }}>Events</h4>
-              {activeEvents.length > 0 ? (
-                activeEvents.map(event => {
+              {events.length > 0 ? (
+                events.map(event => {
                   return (
                     <CalendarPanel
                       key={event._id}
@@ -261,7 +262,8 @@ class CalendarList extends Component {
 }
 
 CalendarList.propTypes = {
-  getEvents: PropTypes.func.isRequired
+  getEvents: PropTypes.func.isRequired,
+  getEventsByMonth: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -270,5 +272,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getEvents }
+  { getEvents, getEventsByMonth }
 )(CalendarList);

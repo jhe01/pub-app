@@ -10,6 +10,14 @@ export const getEvents = () => async dispatch => {
   });
 };
 
+export const getEventsByMonth = filter => async dispatch => {
+  const res = await axios.post("/api/events/get_by_month", filter);
+  dispatch({
+    type: GET_EVENTS,
+    payload: res.data
+  });
+};
+
 export const getEvent = id => async dispatch => {
   const res = await axios.get(`/api/events/get/${id}`);
 

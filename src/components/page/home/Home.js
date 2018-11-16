@@ -8,19 +8,18 @@ import { getEvents } from "../../../actions/events";
 import Header from "../../layout/Header";
 import Calendar from "./Calendar";
 import CalendarPanel from "./CalendarPanel";
+import ViewActionButton from "../../util/ViewActionButton";
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      calendarEvents: [],
-      events: [],
-      list: [],
-      dateClicked: "",
-      selectedEvents: [],
-      goToDate: ""
-    };
-  }
+  state = {
+    calendarEvents: [],
+    events: [],
+    list: [],
+    dateClicked: "",
+    selectedEvents: [],
+    goToDate: ""
+  };
+
   componentDidMount() {
     this.props.getEvents();
   }
@@ -71,7 +70,7 @@ class Home extends Component {
       <React.Fragment>
         <Header />
         <div className="container" style={{ marginTop: "10px" }}>
-          {/* <h4>Calendar of Events</h4> */}
+          <ViewActionButton active="calendar" />
           <div className="row">
             <div className="col s12 m8">
               <Calendar

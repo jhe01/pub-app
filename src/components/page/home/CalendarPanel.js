@@ -23,7 +23,7 @@ class CalendarPanel extends Component {
             ) : (
               ""
             )}
-            <div class={`${this.props.list ? "card-stacked" : ""}`}>
+            <div className={`${this.props.list ? "card-stacked" : ""}`}>
               <div className="card-content">
                 <span className="card-title blue-text text-darken-4">
                   {event.title}
