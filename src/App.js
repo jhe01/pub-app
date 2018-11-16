@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import Home from "./components/page/home/Home";
+import CalendarList from "./components/page/home/CalendarList";
 import Event from "./components/page/event/Event";
 
 import "materialize-css/dist/css/materialize.min.css";
@@ -19,6 +20,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/event/:id" component={Event} />
+              <Route exact path="/list" component={CalendarList} />
             </Switch>
           </div>
         </Router>

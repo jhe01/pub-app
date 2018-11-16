@@ -104,11 +104,12 @@ class Home extends Component {
                           key={event._id}
                           event={event}
                           noEvent={false}
+                          list={false}
                         />
                       );
                     })
                   ) : (
-                    <CalendarPanel key={0} noEvent={true} />
+                    <CalendarPanel key={0} noEvent={true} list={false} />
                   )}
                 </div>
               </div>
