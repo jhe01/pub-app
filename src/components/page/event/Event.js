@@ -72,7 +72,7 @@ class Event extends Component {
     } = this.state;
 
     const createMarkUp = () => {
-      return { __html: details };
+      return { __html: details !== "" ? details : "No Details." };
     };
     return (
       <React.Fragment>
